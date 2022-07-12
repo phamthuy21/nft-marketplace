@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useLayoutEffect, useState } from "react";
 import Navbar from "./Navbar";
 import styled from "styled-components";
 import hero from "../assets/hero.png";
@@ -7,11 +7,41 @@ import Button from "./Button";
 
 export default function Home() {
   const [count, setCount] = useState(0);
-  if(count <= 399){
-    setTimeout(() => {
-      setCount(prev => prev +1);
-    }, 10);
-  }
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+
+  useLayoutEffect(() => {
+    if (count >= 555) {
+      setCount(555);
+    } else {
+      const timerID = setInterval(() => {
+        setCount((prev) => prev + 10);
+      }, 10);
+      return () => clearInterval(timerID);
+    }
+  }, [count]);
+
+  useLayoutEffect(() => {
+    if (count1 >= 666) {
+      setCount1(666);
+    } else {
+      const timerID = setInterval(() => {
+        setCount1((prev) => prev + 10);
+      }, 10);
+      return () => clearInterval(timerID);
+    }
+  }, [count1]);
+
+  useLayoutEffect(() => {
+    if (count2 >= 888) {
+      setCount2(888);
+    } else {
+      const timerID = setInterval(() => {
+        setCount2((prev) => prev + 10);
+      }, 10);
+      return () => clearInterval(timerID);
+    }
+  }, [count2]);
 
   return (
     <Section>
@@ -45,12 +75,12 @@ export default function Home() {
             </div>
 
             <div className="dataTab">
-              <h2>12K</h2>
+              <h2>{count1}K</h2>
               <h5>Auction</h5>
             </div>
 
             <div className="dataTab">
-              <h2>20K</h2>
+              <h2>{count2}K</h2>
               <h5>Artist</h5>
             </div>
           </div>
